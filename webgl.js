@@ -267,7 +267,7 @@ function draw(dt)
 {
 	gl.viewport(0,0, gl.canvas.width, gl.canvas.height)
 
-	gl.clearColor(0,0,1,1)
+	gl.clearColor(82/255, 47/255, 159/255,1)
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	gl.enable(gl.DEPTH_TEST)
