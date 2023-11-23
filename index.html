@@ -32,23 +32,18 @@
 		<script id="vertex-shader" type="nojs">
 
 attribute vec4 a_position;
-attribute vec4 a_color;
 
 attribute vec2 a_texcoord;
 
 uniform mat4 transform;
 uniform mat4 perspective;
 
-varying vec4 color;
 varying vec2 v_texcoord;
-varying vec4 coords;
 
 void main() 
 {
 	vec4 pos = perspective * transform * a_position ;
-	color = a_color;
 	v_texcoord = a_texcoord;
-	coords = a_position;
 
 
 	gl_Position = pos;
@@ -57,9 +52,7 @@ void main()
 	<script id="fragment-shader" type="nojs">	
 precision mediump float;
 
-varying vec4 color;
 varying vec2 v_texcoord;
-varying vec4 coords;
 
 uniform sampler2D u_texture;
 
