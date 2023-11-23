@@ -1,6 +1,7 @@
 "use strict";
 
 const pi = Math.PI
+const roll_speed = 0.04
 
 const buffers = {}
 const attributes = {}
@@ -69,12 +70,14 @@ function lerp(x,y,w)
 	return (1-w)*x + y*w
 }
 
-function roll() 
+function roll(n) 
 {
 	number = Math.floor(Math.random()*6)
 	console.log(number+1)
 	weight = 0
 	begin = angle
+	if (n !== 0)	
+		setTimeout(() => roll(n-1), (1/roll_speed)*16)
 }
 
 function makeBuffer(gl, type, data)
@@ -215,7 +218,7 @@ function draw(dt)
 	angle[1] = lerp(begin[1],numbers[number][1],weight)
 	angle[2] = lerp(begin[2],numbers[number][2],weight)
 	
-	weight += 0.01
+	weight += roll_speed 
 	weight = Math.min(weight, 1)
 
 	mat4.rotate(transform, transform, angle[0], [1,0,0])
