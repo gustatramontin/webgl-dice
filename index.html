@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+<style>
+ canvas {
+	 border: 5px solid black;
+ }
+</style>
+	</head>
+	<body>
+		<canvas id="c" width="500" height="500"></canvas>
+		<button onclick="roll()">Roll</button>
+		<script id="vertex-shader" type="nojs">
+
+attribute vec4 a_position;
+attribute vec4 a_color;
+
+attribute vec2 a_texcoord;
+
+uniform mat4 transform;
+uniform mat4 perspective;
+
+varying vec4 color;
+varying vec2 v_texcoord;
+varying vec4 coords;
+
+void main() 
+{
+	vec4 pos = perspective * transform * a_position ;
+	color = a_color;
+	v_texcoord = a_texcoord;
+	coords = a_position;
+
+
+	gl_Position = pos;
+}
+		</script>
+	<script id="fragment-shader" type="nojs">	
+precision mediump float;
+
+varying vec4 color;
+varying vec2 v_texcoord;
+varying vec4 coords;
+
+uniform sampler2D u_texture;
+
+void main()
+
+{
+
+	vec4 final_color = texture2D(u_texture, v_texcoord);
+	gl_FragColor = final_color;
+}
+		</script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+      integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+      crossorigin="anonymous"
+    ></script>
+		<script src="webgl.js"></script>
+	</body>
+</html>
