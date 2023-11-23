@@ -171,6 +171,8 @@ async function init()
 {
 
 	const canvas = document.querySelector("#c")
+	canvas.width = innerWidth
+	canvas.height = innerHeight
 	gl = canvas.getContext("webgl")
 
 	if (!gl)
